@@ -15,6 +15,7 @@ I am a Canadian medical oncologist, and have a Masters of Epidemiology. I am spe
 pandas 2.2.0
 numpy 1.25.2
 matplotlib 3.8.2
+* Please run entire notebook. Section where data was "dirty-fied" was removed, as was captured in uploaded dirty picklefiles
 
 ## Difficulties with Assignment #2
 * Understanding the format of the data (particularly the image data) was the most challenging, as I needed to learn about how image data is stored, what image "hasing" was, etc.
