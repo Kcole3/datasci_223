@@ -19,7 +19,7 @@ matplotlib 3.8.2
 * Please run entire notebook. Section where data was "dirty-fied" was removed, as was captured in uploaded dirty picklefiles
 
 ## Difficulties with Assignment #2
-* Understanding the format of the data (particularly the image data) was the most challenging, as I needed to learn about how image data is stored, what image "hasing" was, etc.
+* Understanding the format of the data (particularly the image data) was the most challenging, as I needed to learn about how image data is stored, what image "hashing" was, etc.
 * Slightly different syntax than R
 
 ## Goals for the Course:
