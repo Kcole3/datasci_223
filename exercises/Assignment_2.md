@@ -6,7 +6,7 @@ This is a link to assignment 1: [Link](https://github.com/Kcole3/datasci_223/tre
 1. Katherine Cole
 
 # Instructions to run code:
-1. Learn the basics of the python language, particularly machine learning libraries and other statistical libraries that can be utilized in health research
-2. Become proficient in using git/github/virtual environments for project collaboration
+1. 
 
 # Difficulties with Assignment
+1. 
