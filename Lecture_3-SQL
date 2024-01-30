@@ -1,0 +1,43 @@
+#Lecture 3- Using SQL
+#January 29, 2023
+
+
+#Comes installed with python by default
+#Most statements start with term "SELECT"
+#JOIN- joins aross databases, and enables you to specify how they are connected
+#Asking- for each department, how many employees are there?
+#WHERE helps to filter the result set
+#Coding and execution order are not the same
+
+#Semi-colons indicate the end of a statement. Comments are defined by "--"
+#SELECT doesn't change the database, it just asks for a query.
+
+#JOIN- combines multiple data tables
+#FROM employees e creates an alias for "employees"
+
+#Left join is the default. Full joins can be resource intensive
+#HAVING allows you to specify filtering condition without having to do a sub-query first
+
+#CTE = common table expression
+
+#Window functions- apply functions across rows without doing a join
+
+#SQL uses- cohort identification, extraction, and data-manipulation
+
+#Temporary tables exist for the entire session until dropped
+
+#Pyarrow- allows to run queries on data larger than your memory would normally allow
+
+#SQL Magic. There are extensions within a jupyter notebook that allow you to use sequel
+
+
+#Exercise- to get to artist, you need to join to albums. The connections are important. Shows the different variables
+#that are present in each table.
+
+#F1 data- 
+
+#If use %%sql, everything within the cell will be run as a SQL object
+
+
+#Exercise
+
