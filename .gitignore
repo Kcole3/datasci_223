@@ -1,4 +1,12 @@
 .DS_Store
 .venv/
+<<<<<<< HEAD
 *.csv
 *.pkl
+=======
+data/
+.vscode/
+animals/
+models/
+checkpoints/
+>>>>>>> 0728ee257b8829314e6e588024fd26bbec08563d
