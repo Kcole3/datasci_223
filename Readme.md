@@ -1,6 +1,6 @@
 # Katherine Cole's Repository
 
-This is a link to assignment 4/5: [Link]()
+This is a link to assignment 4/5: [Link](https://github.com/Kcole3/datasci_223/blob/lecture_4_branch/exercises/4-classification/Classification.ipynb)
 
 ## Collaborators:
 * None
