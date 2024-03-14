@@ -10,7 +10,13 @@
 
 * NEED TO MAKE SURE THAT I TEST ON THE BEST MODEL!!!!!!!
 
-## Different algorithms utilized in this project
+## Different algorithms utilized in this project with corresponding C statistics
+
+| Model | C Statistic|
+|-----------------|-----------------|
+| CoxPH Model #1 | 757 (std: 0.019) |
+| CoxPH Model #2 | Row 2, Column 2 |
+
 
 * Kaplan Meier and Cox Proportional Hazards Analysis
 * Cox Neural Networks
@@ -21,7 +27,7 @@
 * Convolutional neural network
 
 
-* The link to the jupyter notebook for this project can be found here [Link](insert code)
+* The link to the jupyter notebook for the course project can be found here [Link](insert code)
 
 ## Package requirements
 * pandas 
@@ -81,7 +87,7 @@ numpy
 * The C statistic for the CoxPH through CoxPHSurvivalAnalysis was 0.767 Following 3 fold CV, the C statistic was 0.757 (std: 0.019)
 
 * A series of helper functions were then developed by Mbotwa et al., 2021 which helped to implement the negative partial log likelihood as a loss function. THis will be the loss function in all subsequent models
-* A second method of CoxPH was fit using CoxPHFitter. The beta coefficients are slightly different between the two methods, which has been flagged as an inconsistency by other authors. [Link] https://gist.github.com/jackyko1991/bd0e605fa03b2c3e244d08db2b68edd8
+* A second method of CoxPH was fit using CoxPHFitter. The beta coefficients are slightly different between the two methods, which has been flagged as an inconsistency by other authors. [Link](https://gist.github.com/jackyko1991/bd0e605fa03b2c3e244d08db2b68edd8)
 * For this approach, the C statistic was 0.83. It is beyond the scope of this project to deeply delve into the reasons for the differences between these two methods, however, in subsequent analysis, implementation of simple neural networks using Cox methodology (eg. CoxNN) yielded C-statistic scores which were compatible with the score obtained through CoxPHSurvival Analysis.  I also experimented with L1 and L2 penelties, which did not contribute to an improved model fit.
 
 * The C statistic in the test holdeover (done using the lifelines method for simplicity as there is a built in function) was 0.663, which will be used to the holdout score from the best performing NN.
@@ -129,7 +135,17 @@ numpy
 
 ### Step 9- (Simple) Convolutional Neural Networks
 
-* The purpose of this part of the project was primarily to understand the structure of the CNN in greater detail.
-* Further details regarding the 
+* The purpose of this part of the project was primarily to understand the structure of the CNN in greater detail, of which I have annotated the reference code.
+* Patient features were converted to images in a fully connected model, and ReLu activation functions are again used. 
+* In this relatively small and simple dataset, the model performed quite poorly, which is not surprising.
 
-* tuning with different activation functions
+
+## Discussion
+
+* Overall, the model with the best performance was the **** model, with a C- statistic of 
+* This model was therefore selected to be used in the holdout test dataset
+
+## Next Steps
+
+* tuning with different activation functions, ranges of hidden layers
+* Combine tabular data with raw image data from staging scans into a hybrid model.
