@@ -1,70 +1,59 @@
 # Katherine Cole's Final Project- DataScience 223
 
+
+* The link to the jupyter notebook for the course project can be found here [Link](insert code)
+
 ## The project
-* This project will consist of a survival analysis using both standard approaches (Kaplan Meier analysis and Cox proportional hazard models) as well as analysis using different neural network methods.  I will apply these methods to a heterogenous population of solid tumor cancer patients of all stages diagnosed between 2015-2018 who received at least 1 dose of checkpoint inhibitor therapy (Valero et al, Nature Communications, 2021). 
+* This project will consist of a survival analysis using both standard approaches (Kaplan Meier analysis and Cox proportional hazard models) as well as survival analysis using various neural network methods.  I will apply these methods to a heterogenous population of solid tumor cancer patients of all stages diagnosed between 2015-2018 who received at least 1 dose of checkpoint inhibitor therapy (Valero et al, Nature Communications, 2021). 
 * The article and data are publically avaliable from [Link](https://www.nature.com/articles/s41467-021-20935-9)
-* The code is adapted from Mbotwa et al., 2021, and is available from [GitHub repository](https://github.com/omariosc/survival-analysis). Please note that the helper functions provided detailed information regarding the included arguments, which I did not modify.
-* The main object of the analysis is to test different model structures to determine which algorithm is most predictive of overall survival, as assessed via the C-statistic. Cox proportional hazards analysis will serve as the standard against which other neural network (NN) models will be assessed.
+* The code is adapted from Mbotwa et al., 2021, and is available from [GitHub repository](https://github.com/omariosc/survival-analysis). Please note that the helper functions were provided in the reference code, which I did not modify.
+* The main object of the analysis is to test different model structures to determine which algorithm is most predictive of overall survival, as assessed via the C-statistic in a hold-out dataset. Cox proportional hazards analysis will serve as the standard against which other neural network (NN) models will be assessed.
 * The context of this project stems from the fact that checkpoint inhibitor clinical trials frequently have survival curves which have crossover and long tails, thus violating the proportional hazards assumption necessary for accurate estimation of risk in CoxPH analysis.
 * Skills that were applied in this project include data cleaning and exploratory analysis, semi-parameter survival analysis, and NN model training. For the helper functions, I also invested time in annotating the code to ensure that I understood the different components of the function. By slowly building on the architecture of the NN model, I now feel that I have a better understanding of the different components of these algorithsms. 
-
-* NEED TO MAKE SURE THAT I TEST ON THE BEST MODEL!!!!!!!
 
 ## Different algorithms utilized in this project with corresponding C statistics
 
 | Model | C Statistic|
 |-----------------|-----------------|
-| CoxPH Model #1 | 757 (std: 0.019) |
-| CoxPH Model #2 | Row 2, Column 2 |
+| CoxPH Model #1 | 0.767, 3 fold CV 757 (std: 0.019) |
+| CoxPH Model #2 | 0.83 | Holdover = 0.663 |
+| CoxNNet |0.767 |
+| Randomized Linear Weights | 0.767 |
+| Row 3, Column 1 | Row 3, Column 2 |
+| Row 4, Column 1 | Row 4, Column 2 |
 
 
 * Kaplan Meier and Cox Proportional Hazards Analysis
 * Cox Neural Networks
 * Randomized linear weights model (adapted from fixed linear weight structure)
 * Single neural network
-* Generalized neural networks with >1 hidden network
-* Latent class analysis (to identify hidden populations)
+* Generalized neural networks with >1 hidden layer
+* Latent class analysis (to identify hidden populations) +/- the addition of GNN architecture
 * Convolutional neural network
 
-
-* The link to the jupyter notebook for the course project can be found here [Link](insert code)
-
 ## Package requirements
-* pandas 
-* re
-* numpy
-* seaborn 
-* matplotlib
-* sksurv
-* lifelines
-
-%pip install pandas==1.5.3
-%pip install numpy==1.23.5
-%pip install lifelines==0.27.4
-%pip install pretty-errors==1.2.25
-%pip install matplotlib==3.7.1
-%pip install pyreadstat==1.1.8
-%pip install scikit-learn==1.2.2
-%pip install scikit-survival==0.20.0
-%pip install seaborn==0.12.2
-%pip install torch==2.0.0
-re
-numpy
-
+* %pip install pandas==1.5.3
+* %pip install ydata-profiling==4.6.4
+* %pip install scikit-learn==1.2.2
+* %pip install scikit-survival==0.22.2
+* %pip install matplotlib==3.7.1
+* %pip install matplotlib-inline==0.1.6
+* %pip install numpy==1.23.5
+* %pip install torch==2.0.0
+* %pip install lifelines==0.27.4
 
 
 ## The data
-* The original data consists of a tabular dataset including 2037 individuals with 20 clinical features prior to data cleaning. 
+* The original data (prior to data cleaning) consisted of a tabular dataset including 2037 individuals with 20 clinical features 
 * Features included demographic data (eg. patient age, functional status), cancer-specific data (eg. cancer subtype, stage, tumor mutation burden, neutrophil to lymphocyte ratio), treatment specific data (eg. type of checkpoint inhibitor therapy, line of treatment, response to treatment), and survival data (vital status, progression free survival, and overall survival). Overall survival was defined as death by any cause. Patients who were alive at the time of final review were censored at last contact.
 * All features were categorical excluding tumor_mutational burden and neutrophil to lymphocyte ratio, which were continuous.
 
 ## Project components
 
 ### Step 1- Data Cleaning
-* Rename column names
-* Restrict analysis to adults who have non-gynecoloic solid organ tumors with subtypes generally responsive to checkpoint inhibitor therapy, and who had a sufficient number of observations (cancer subtypes included lung, genitourinary, lower gastrointestinal, upper gastrointestinal, head and neck, and melanoma cancers.)
-* Recategorize age into 10 year blocks until age 80, which will include all remaining participants. This was pursued to reduce the number of category levels, which was causing challenges with CoxPH convergence.
-* Collapse category levels (eg. variables with low counts were collapsed with other categories in the stage and ECOG/functional status categories)
+* Column names were renamed, and analysis was restricted to adults who have non-gynecologic solid organ tumors with subtypes generally responsive to checkpoint inhibitor therapy, and who had a sufficient number of observations. Cancer subtypes included lung, genitourinary, lower gastrointestinal, upper gastrointestinal, head and neck, and melanoma cancers.
+* Age was recategorized into 10 year blocks until age 80, which included remaining participant age groups. Recategorization was pursued to reduce the number of category levels, which was causing challenges with CoxPH convergence.
+* Category levels were collapsed for instances where specified levels had low counts (eg. variables with low counts were collapsed with other categories in the stage and ECOG/functional status categories)
 
 ### Step 2- Exploratory Analysis and Data Processing
 
@@ -78,7 +67,7 @@ numpy
 
 ### Step 3- Generate Kaplan Meier Curves and Cox Proportional Hazard Models
 
-* Data was split into train (85%) and test (15%) data. The test data was kept as a holdout to assess predictive capacity in both the CoxPH model, and the NN model with the best predictive accuracy. Of note, the authors did have their own train and validate data as part of the dataset, however, I preferred to resample to limit confounding by factors such as time effect.
+* Data was split into train (85%) and test (15%) data. The test data was kept as a holdout to assess predictive capacity in both the CoxPH model, and the NN model with the best predictive accuracy. Of note, Valero et al. did have their own train and validate data as part of the dataset, however, I preferred to resample to limit confounding by factors such as time effect.
 * The probability of survival was initially estimated via Kaplan Meier survival curves
 * Cox Proportional Hazard analysis was then pursued- Two methods of CoxPH were evaluated: CoxPHSurvivalAnalysis through sksurv.linear.model AND CoxPHFitter through via lifelines
 * The final model included sex (2 levels), drug_class (2 levels), progression (2 levels yes/no), cancer_type (6 levels), overall survival (continuous), vital_status(2 levels- dead(1) vs alive(0))
@@ -88,7 +77,7 @@ numpy
 
 * A series of helper functions were then developed by Mbotwa et al., 2021 which helped to implement the negative partial log likelihood as a loss function. THis will be the loss function in all subsequent models
 * A second method of CoxPH was fit using CoxPHFitter. The beta coefficients are slightly different between the two methods, which has been flagged as an inconsistency by other authors. [Link](https://gist.github.com/jackyko1991/bd0e605fa03b2c3e244d08db2b68edd8)
-* For this approach, the C statistic was 0.83. It is beyond the scope of this project to deeply delve into the reasons for the differences between these two methods, however, in subsequent analysis, implementation of simple neural networks using Cox methodology (eg. CoxNN) yielded C-statistic scores which were compatible with the score obtained through CoxPHSurvival Analysis.  I also experimented with L1 and L2 penelties, which did not contribute to an improved model fit.
+* For this approach, the C statistic was 0.83. It is beyond the scope of this project to deeply delve into the reasons for the differences between these two methods, however, in subsequent analysis, implementation of simple neural networks using Cox methodology (eg. CoxNN) yielded C-statistic scores which were compatible with the score obtained through CoxPHSurvival Analysis (method #1). I also experimented with L1 and L2 penelties using the CoxPHFitter approach, which did not contribute to an improved model fit.
 
 * The C statistic in the test holdeover (done using the lifelines method for simplicity as there is a built in function) was 0.663, which will be used to the holdout score from the best performing NN.
 
@@ -147,5 +136,5 @@ numpy
 
 ## Next Steps
 
-* tuning with different activation functions, ranges of hidden layers
-* Combine tabular data with raw image data from staging scans into a hybrid model.
+* Tuning the best model with different activation functions, ranges of hidden layers, learning rates, etc.
+* Incorporating raw image data from staging scans with tabular clinical data into a hybrid NN model.
