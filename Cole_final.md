@@ -1,7 +1,7 @@
 # Katherine Cole's Final Project- DataScience 223
 
 
-* The link to the jupyter notebook for the course project can be found here [Link](insert code)
+* The link to the jupyter notebook for the course project can be found here [Link](https://github.com/Kcole3/datasci_223/blob/Neural-networks/exercises/final_project.ipynb)
 
 ## The project
 * This project will consist of a survival analysis using both standard approaches (Kaplan Meier analysis and Cox proportional hazard models) as well as survival analysis using various neural network methods.  I will apply these methods to a heterogenous population of solid tumor cancer patients of all stages diagnosed between 2015-2018 who received at least 1 dose of checkpoint inhibitor therapy (Valero et al, Nature Communications, 2021). 
